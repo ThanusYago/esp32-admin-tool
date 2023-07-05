@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="theme.css" />
     <link rel="stylesheet" href="MoneAdmin.css" />
     <link rel="stylesheet" href="font-awesome.css" />
+    <link rel="stylesheet" href="bootstrap-switch.css" />
+    <link rel="stylesheet" href="styles.css" />
+
     <!--END GLOBAL STYLES -->
     <!-- PAGE LEVEL STYLES -->
     <link href="layout2.css" rel="stylesheet" />
@@ -46,11 +49,11 @@
                         </a>
                         <ul class="dropdown-menu dropdown-user">
                             <li>
-                                <a href="#"><i class="icon-user"></i> User </a>
+                                <a href="esp-admin"><i class="icon-user"></i> User </a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="#"><i class="icon-signout"></i> Logout </a>
+                                <a href="esp-logout"><i class="icon-signout"></i> Logout </a>
                             </li>
                         </ul>
                     </li>
@@ -77,18 +80,18 @@
                 <br />
             </div>
             <ul id="menu" class="collapse">
-                <li class="panel">
+                <li class="panel active ">
                     <a href="/">
                         <i class="icon-th-large"></i> Dashboard
                     </a>
                 </li>
                 <li class="panel">
-                    <a href="#">
+                    <a href="esp-wifi">
                         <i class="icon-signal"></i> WIFI
                     </a>
                 </li>
                 <li class="panel">
-                    <a href="#">
+                    <a href="esp-mqtt">
                         <i class="icon-sitemap"></i> MQTT
                     </a>
                 </li>
@@ -100,14 +103,14 @@
                           <i class="icon-angle-left"></i>
                     <ul class="collapse" id="component-nav">
 
-                        <li class=""><a href="#"><i class="icon-angle-right"></i> Device </a></li>
-                        <li class=""><a href="#"><i class="icon-angle-right"></i> Settings Default</a></li>
-                        <li class=""><a href="#"><i class="icon-angle-right"></i> Restart </a></li>
-                        <li class=""><a href="#"><i class="icon-angle-right"></i> Password </a></li>
+                        <li class=""><a href="esp-device"><i class="icon-angle-right"></i> Device </a></li>
+                        <li class=""><a href="esp-retore"><i class="icon-angle-right"></i> Settings Default</a></li>
+                        <li class=""><a href="esp-restart"><i class="icon-angle-right"></i> Restart </a></li>
+                        <li class=""><a href="esp-admin"><i class="icon-angle-right"></i> Password </a></li>
                     </ul>
                 </li>
                 <li class="panel">
-                    <a href="#">
+                    <a href="esp-logout">
                         <i class="icon-signout"></i> Exit
                     </a>
                 </li>
@@ -122,59 +125,193 @@
                         <h2>Device State</h2>
                     </div>
                 </div>
-                <hr />
+                <!--BLOCK SECTION -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div style="text-align: center;">
+
+                            <a class="quick-btn" href="#">
+                                <i class="icon-info-sign icon-2x"></i>
+                                <span> Divice</span>
+                        <span class="label label-danger">ESP32</span>
+                    </a>
+
+                    <a class="quick-btn" href="#">
+                        <i class="icon-signal icon-2x"></i>
+                        <span>WIFI RSSI</span>
+                        <span class="label label-success">-66 dB m</span>
+                    </a>
+                    <a class="quick-btn" href="#">
+                        <i class="icon-sitemap icon-2x"></i>
+                        <span>MQTT</span>
+                        <span class="label label-warning">Oline</span>
+                    </a>
+                    <a class="quick-btn" href="#">
+                        <i class="icon-fire icon-2x"></i>
+                        <span>Temp. CPU</span>
+                        <span class="label btn-metis-2">20.5 C</span>
+                    </a>
+                    <a class="quick-btn" href="#">
+                        <i class="icon-retweet icon-2x"></i>
+                        <span>Restarts</span>
+                        <span class="label btn-metis-4">107</span>
+                    </a>
+                    <a class="quick-btn" href="#">
+                        <i class="icon-time icon-2x"></i>
+                        <span>Activated</span>
+                        <span class="label label-default">20</span>
+                    </a>
+        </div>
+    </div>
+    </div>
+    <!--END BLOCK SECTION -->
+    <hr />
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><i class="icon-info-sign"></i> Geral info
+                <span class="badge pull-right">adminesp32 / 9B1C5210CE0C3D</span>
+            </div>
+            <div class="panel-body">
+                <h3> Inalámbrico</h3>
+                <div>
+                    <span class="label label-primary"> WiFi Status:</span>
+                    <span id="WFEstatus"><span class="label label-success"> CONECTED </span>
+                    </span>
+                </div>
+                <div>
+                    <span class="label label-primary">Red WiFi:</span>
+                    <span>HOME</span></div>
+                <div>
+                    <span class="label label-primary">IP WiFi:</span>
+                    <span>192.168.0.150</span> </div>
+                <div>
+                    <span class="label label-primary">MAC WiFi:</span>
+                    <span>10:50:1C:9B:3D:0C</span></div>
+                <div><span class="label label-primary">RSSI WiFi:</span>
+                    <span id="WFDBM">-66 dBm</span></div>
+                <div>
+                    <span class="label label-primary">WiFi Signal:</span><span id="WFPRC"> 68 %</span></div>
+                <hr>
+                <h3>Broker MQTT</h3>
+                <div>
+                    <span class="label label-primary">MQTT Status:</span>
+                    <span class="MQTTStatus"></span>
+                    <span class="label label-success">CONECTED</span>
+                </div>
+                <div><span class="label label-primary"> MQTT Server:</span>
+                    <span id="MQTTBroker">growhugeyields.com</span>
+                </div>
+                <div><span class="label label-primary">MQTT User:</span><span>Grow High</span>
+                </div>
+                <div>
+                    <span class="label label-primary">ID MQTT Client:</span>
+                    <span>ESP329B1C52100C3D</span>
+                </div>
+                <hr>
+                <h3>Information Geral</h3>
+                <div><span class="label label-primary">Indetification:</span>
+                    <span id="id">adminesp32</span>
+                </div>
+                <div><span class="label label-primary">Serail Number:</span>
+                    <span>9B1C5210CE0C3D</span>
+                </div>
+                <div><span class="label label-primary">mDNS Url:</span>
+                    <span>http://adminesp32.local</span>
+                </div>
+                <div><span class="label label-primary">Adress IP Client:</span>
+                    <span>192.168.0.140</span>
+                </div>
+                <div><span class="label label-primary">Browser of Client:</span>
+                    <span>Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safar/537.36</span>
+                </div>
+                <div><span class="label label-primary">Firmware Version:</span>
+                    <span>v1.1.0a-Build-20211117</span>
+                </div>
+                <div><span class="label label-primary">SDK:</span>
+                    <span>v3.3.5-1-g85c43024c</span>
+                </div>
+                <div><span class="label label-primary">Hardware Version:</span>
+                    <span>ADMINESP32 v1 00000000</span>
+                </div>
+                <div><span class="label label-primary">CPU FREQ:</span>
+                    <span>240 MHz</span>
+                </div>
+                <div><span class="label label-primary">RAM SIZE:</span>
+                    <span>341.22 KB</span>
+                </div>
+                <div><span class="label label-primary">FLASH SIZE:</span>
+                    <span>4.00 MB</span>
+                </div>
+                <div><span class="label label-primary">Manufacturer:</span>
+                    <span>Grow Huge Yiels</span>
+                </div>
+                <div><span class="label label-primary"> Time Activated:</span>
+                    <span>1:22:15:40</span>
+                </div>
+                <div><span class="label label-primary">Restarts:</span>
+                    <span>9</span>
+                </div>
+
+
+
+
+
             </div>
         </div>
-        <!--END PAGE CONTENT -->
-        <!-- RIGHT STRIP  SECTION -->
-        <div id="right">
+    </div>
+    </div>
+    </div>
+    <!--END PAGE CONTENT -->
+    <!-- RIGHT STRIP  SECTION -->
+    <div id="right ">
 
-            <div class="well well-small">
-                <span>Profit</span><span class="pull-right"><small>20%</small></span>
-                        <div class="progress mini">
-                            <div class="progress-bar progress-bar-info" style="width: 20%"></div>
-                        </div>
-                        <span>Sales</span><span class="pull-right"><small>40%</small></span>
+        <div class="well well-small ">
+            <span>Signal Wifi</span><span class="pull-right "><small>80%</small></span>
+            <div class="progress mini ">
+                <div class="progress-bar progress-bar-info " style="width: 80% "></div>
+            </div>
+            <span>Flash Available</span><span class="pull-right "><small>76%</small></span>
+            <div class="progress mini ">
+                <div class="progress-bar progress-bar-success " style="width: 76% "></div>
+            </div>
+            <span>RAM Available</span><span class="pull-right "><small>80%</small></span>
+            <div class="progress mini ">
+                <div class="progress-bar progress-bar-danger " style="width: 80% "></div>
+            </div>
 
-                        <div class="progress mini">
-                            <div class="progress-bar progress-bar-success" style="width: 40%"></div>
-                        </div>
-                        <span>Pending</span><span class="pull-right"><small>60%</small></span>
-
-                        <div class="progress mini">
-                            <div class="progress-bar progress-bar-warning" style="width: 60%"></div>
-                        </div>
-                        <span>Summary</span><span class="pull-right"><small>80%</small></span>
-
-                        <div class="progress mini">
-                            <div class="progress-bar progress-bar-danger" style="width: 80%"></div>
-                        </div>
+            <!-- END RIGHT STRIP SECTION -->
         </div>
-        <div class="well well-small">
-            <button class="btn btn-block"> Help </button>
-            <button class="btn btn-primary btn-block"> Tickets</button>
-            <button class="btn btn-info btn-block"> New </button>
-            <button class="btn btn-success btn-block"> Users </button>
-            <button class="btn btn-danger btn-block"> Profit </button>
-            <button class="btn btn-warning btn-block"> Sales </button>
-            <button class="btn btn-inverse btn-block"> Stock </button>
+        <div class="well well-small ">
+            <span>Relé 01</span><span class="pull-right sucess "><small class="label label-primary " id="relay1Status ">Ativado</small></span>
+            <div class="make-switch " data-on="primary " data-off="info ">
+                <input type="checkbox " id="relay1 " checked="checked ">
+            </div>
+            <br>
+            <br>
+            <span>Relé 02</span><span class="pull-right sucess "><small class="label label-primary " id="relay2Status ">Ativado</small></span>
+            <div class="make-switch " data-on="primary " data-off="info ">
+                <input type="checkbox " id="relay2 " checked="checked ">
+            </div>
         </div>
     </div>
-    <!-- END RIGHT STRIP  SECTION -->
     </div>
     <!--END MAIN WRAPPER -->
-    <!-- FOOTER -->
-    <div id="footer">
+    </div>
+    <div id=" footer ">
         <p>&copy; Grower High &nbsp;2023 &nbsp; v1.0.0</p>
     </div>
     <!--END FOOTER -->
     <!-- GLOBAL SCRIPTS -->
-    <script src="jquery-2.0.3.min.js"></script>
-    <script src="bootstrap.min.js"></script>
-    <script src="modernizr-2.6.2.min.js"></script>
+    <script src="jquery-2.0.3.min.js "></script>
+    <script src="bootstrap.min.js "></script>
+    <script src="modernizr-2.6.2.min.js "></script>
+    <script src="bootstrap-switch.min.js "></script>
+    <script src="scripts.js"></script>
     <!-- END GLOBAL SCRIPTS -->
 </body>
 <!-- END BODY-->
+
+</html>
 
 </html>
 
