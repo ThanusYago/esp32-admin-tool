@@ -37,7 +37,7 @@ int     bootCount;          //restart restarts
 //-------------------------------------------
 // Zone AP - acess point
 //-------------------------------------------
-boolean ap_acessPoint;
+boolean ap_accessPoint;
 char    ap_nameap[31];
 char    ap_passwordap[63];
 int     ap_canalap;
@@ -46,4 +46,4 @@ int     ap_connetap;
 //-------------------------------------------
 // Zone Others  */
 //-------------------------------------------
-uint_t ip[4];               //variables function convert String to IP 
+uint8_t ip[4];               //variables function convert String to IP 

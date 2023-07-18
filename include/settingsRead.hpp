@@ -31,7 +31,7 @@ boolean settingsReadWiFi(){
         strlcpy(wifi_primaryDNS, jsonConfig["wifi_primaryDNS"], sizeof(wifi_primaryDNS));
         strlcpy(wifi_secondaryDNS, jsonConfig["wifi_secondaryDNS"], sizeof(wifi_secondaryDNS));
         /*---------------------- AP ------------------------------*/
-        ap_acessPoint = jsonConfig["ap_accessPoint"];
+        ap_accessPoint = jsonConfig["ap_accessPoint"];
         strlcpy(ap_nameap, jsonConfig["ap_nameap"], sizeof(ap_nameap));
         strlcpy(ap_passwordap, jsonConfig["ap_passwordap"], sizeof(ap_passwordap));
         ap_canalap = jsonConfig[ap_canalap];

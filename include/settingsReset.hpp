@@ -20,7 +20,7 @@ void settingResetWiFi(){
         strlcpy(wifi_primaryDNS, "8.8.8.8", sizeof(wifi_primaryDNS));
         strlcpy(wifi_secondaryDNS, "8.8.4.4", sizeof(wifi_secondaryDNS));
         /*---------------------- AP ------------------------------*/
-        ap_acessPoint = true;
+        ap_accessPoint = true;
         strlcpy(ap_nameap, deviceID().c_str(), sizeof(ap_nameap));
         strlcpy(ap_passwordap, "fox8gqya", sizeof(ap_passwordap));
         ap_canalap = 9;

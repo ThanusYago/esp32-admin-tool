@@ -5,6 +5,8 @@
 * Platform ESP32
 * Project Admin Panel Tool for the ESP32
 */
+
+#include "LedBlink.hpp"
 //-------------------------------------------
 // Genera un log en el puerto Serial
 //-------------------------------------------
@@ -21,17 +23,17 @@ String platform(){
 #endif
 }
 IPAddress CharToIP(const char *str){
-     sscanf(str, "%hhu.%hhu.%hhu.%hhu", &ip[0], &ip[1], &ip[2], &ip[3],);
-     return IPAddress(&ip[0],&ip[1],&ip[2],&ip[3]);
+     sscanf(str, "%hhu.%hhu.%hhu.%hhu", &ip[0], &ip[1], &ip[2], &ip[3]);
+     return IPAddress(ip[0], ip[1], ip[2], ip[3]);
 }
 //-------------------------------------------
 // Retorna IPAddress en formato "n.n.n.n" de IP a String
 //-------------------------------------------
-String ipStrc(const IPAddress &ip){
+String ipStr(const IPAddress &ip){
     String sFn = "";
     for (byte bFn= 0; bFn < 3; bFn++)
     {
-        sFn += String((ip >> (8 * bFn)) & 0cFF) + ".";
+        sFn += String((ip >> (8 * bFn)) & 0xFF) + ".";
     }
     sFn += String(((ip >> 8 * 3) & 0xFF));
     return sFn;
