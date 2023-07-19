@@ -47,7 +47,21 @@ void setup() {
 
 }
 
+
+//-------------------------------------------
+// Loop Principal Nucleo 0
+//-------------------------------------------
+
 void loop() {
   // put your main code here, to run repeatedly:
+  yield();
+  //-------------------------------------------
+  // Libraries
+  //-------------------------------------------
+    if (wifi_mode == WIFI_STA){
+      wifiLoop();
+    }
+    if (wifi_mode == WIFI_AP){
+      wifiAPLoop();    } 
 }
 

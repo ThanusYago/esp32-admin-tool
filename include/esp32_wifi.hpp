@@ -17,6 +17,9 @@ IPAddress netMsk(255, 255, 255, 0);
 
 int wifi_mode = WIFI_STA;
 
+unsigned long previousMillisWIFI = 0;
+unsigned long intervalWIFI = 30000;
+
 // --> recorrendo esse id de settingsResetWiFi.hpp -->  strlcpy(id, "adminesp32", sizeof(id));
 // hotname for ESPmDNS. Should work at least on windows. Try http://adminesp32.local
 const char *esp_hostname = id;
@@ -92,3 +95,29 @@ void wifi_setup(){
         }
     }
 }
+//--------------------------------------------------------------
+// Loop Mode Client
+//--------------------------------------------------------------
+void wifiLoop(){
+
+    unsigned long currentMillis = millis();
+    
+    if (wifi.status() != WL_CONNECTED && (currentMillis - previousMillisWIFI >= intervalWIFI)){
+        //parpadear un led cuando conectandose  al wifi no bloqueante
+        //parpadeo simples de 0.1% de segundoblinkSingle(100, WIFILED);
+        blinkSingle(100, WIFILED);
+
+        WiFi.disconnect();
+        WiFi.reconnect();
+        previusMillisWIFI = currentMillis;
+    }else{
+    blinkSingleAsy(10,,500,WIFILED);
+    }
+}
+//--------------------------------------------------------------
+// Loop Mode AP
+//--------------------------------------------------------------void wifiAPLoop(){
+    //parpadeo variable en con transferencia de Datos
+    blinkRandomSingle(50, 100, WIFILED);
+    dnsServer.processNextRequest(); //Captive portal DNS re-direct
+} 
