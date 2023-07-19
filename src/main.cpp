@@ -33,7 +33,7 @@ void setup() {
   // confifiguraciones de pines
   settingsPines();
   // SPIFFS
-  if(!SPIFFS.begin()){
+  if(!SPIFFS.begin(true)){
     log("Erro: Falló la inicializacion del SPIFFS");
     while (true);
   }

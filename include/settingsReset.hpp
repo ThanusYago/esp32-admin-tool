@@ -11,7 +11,7 @@ void settingResetWiFi(){
         strlcpy(id, "adminesp32", sizeof(id));
         bootCount = 0;
         /*---------------------- CLIENT --------------------------*/
-        wifi_staticIp = false;
+        wifi_staticIp = false;  
         strlcpy(wifi_ssid, "Yago 2.4G", sizeof(wifi_ssid));
         strlcpy(wifi_password, "fox8gqyb34", sizeof(wifi_password));
         strlcpy(wifi_ip_static, "192.168.0.150", sizeof(wifi_ip_static));
@@ -22,7 +22,7 @@ void settingResetWiFi(){
         /*---------------------- AP ------------------------------*/
         ap_accessPoint = true;
         strlcpy(ap_nameap, deviceID().c_str(), sizeof(ap_nameap));
-        strlcpy(ap_passwordap, "fox8gqya", sizeof(ap_passwordap));
+        strlcpy(ap_passwordap, "adminesp32", sizeof(ap_passwordap));
         ap_canalap = 9;
         ap_hiddenap = false;
         ap_connetap = 4;

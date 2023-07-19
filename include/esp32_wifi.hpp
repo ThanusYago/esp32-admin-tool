@@ -13,7 +13,7 @@ const byte DNSSERVER_PORT = 53;
 DNSServer dnsServer;
 
 IPAddress apIP(192, 168, 4, 1);
-IPAddress netMsk(255, 255, 255, 10);
+IPAddress netMsk(255, 255, 255, 0);
 
 int wifi_mode = WIFI_STA;
 
