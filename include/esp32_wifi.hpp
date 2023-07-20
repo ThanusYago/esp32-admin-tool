@@ -45,30 +45,35 @@ void startClient(){
         if (!WiFi.config(CharToIP(wifi_ip_static), CharToIP(wifi_gateway), CharToIP(wifi_subnet), CharToIP(wifi_primaryDNS), CharToIP(wifi_secondaryDNS))){
             log("Error: Falló al conectar el modo Station");
         }
-        WiFi.hostname(deviceID());
-        WiFi.begin(wifi_ssid, wifi_password);
-        log("Info: Conectando WiFi " +  String(wifi_ssid));
-        delay(50);
-        byte b = 0;
-        while (WiFi.status() != WL_CONNECTED && b < 60){
-            b++;
-            log("Warnig: Intentando conecion WiFi...");
-            //para parpadear led WiFi cuando esta conectandoal WiF no bloqueante
-            //Parpadeeo Simple del led cada 100 ms     
-            blinkSingle(100, WIFILED);
-        }
-        if (WiFi.status() == WL_CONNECTED){
-            //WiFi Station conectado
-            log("Info: WiFi conectado (" + String(WiFi.RSSI()) + ") IP " + ipStr(WiFi.localIP()));
-        }else{
-            // WiFi Station NO conetado
-            log(F("Error: WiFi no conectado"));
-            //parpadeo Ramdon del led
-            blinkRandomSingle(10,100, WIFILED);
-            delay(100); 
-        }
+    }
+    WiFi.hostname(deviceID());
+    WiFi.begin(wifi_ssid, wifi_password);
+    log("Info: Conectando WiFi " + String(wifi_ssid));
+    delay(50);
+    byte b = 0;
+    while (WiFi.status() != WL_CONNECTED && b < 60){
+        b++;
+        log("Warnig: Intentando conecion WiFi...");
+        delay(500);
+        //para parpadear led WiFi cuando esta conectandoal WiF no bloqueante
+        //Parpadeeo Simple del led cada 100 ms     
+        blinkSingle(100, WIFILED);
+    }
+    if (WiFi.status() == WL_CONNECTED){
+        //WiFi Station conectado
+        log("Info: WiFi conectado (" + String(WiFi.RSSI()) + ") IP " + ipStr(WiFi.localIP()));
+        //parpadeando Random del led
+        blinkRandomSingle(10,100, WIFILED);
+        delay(100); 
+    }else{
+        // WiFi Station NO conetado
+        log(F("Error: WiFi no conectado"));
+        //parpadeo Ramdon del led
+        blinkRandomSingle(10,100, WIFILED);
+        delay(100); 
     }
 }
+
 //WiF.mode(WIFI_STA) - station mode:  the ESP32 connects to an access point
 //WiF.mode(WIFI_STA) - access point mode: stations can connect to the ESP32
 //WiF.mode(WIFI_STA) - access point and a station connected to another access point
@@ -81,8 +86,9 @@ void wifi_setup(){
         log("Info: WiFI Modo AP");
     }
     // 2) Caso contrario en Modo Station/Client mejor dicho Client
-    else{
+    else {
         WiFi.mode(WIFI_STA);
+        wifi_mode = WIFI_STA;
         startClient();
         log("Info: WiFi Modo Estacion");
     }
@@ -102,21 +108,23 @@ void wifiLoop(){
 
     unsigned long currentMillis = millis();
     
-    if (wifi.status() != WL_CONNECTED && (currentMillis - previousMillisWIFI >= intervalWIFI)){
+    if (WiFi.status() != WL_CONNECTED && (currentMillis - previousMillisWIFI >= intervalWIFI)){
         //parpadear un led cuando conectandose  al wifi no bloqueante
         //parpadeo simples de 0.1% de segundoblinkSingle(100, WIFILED);
         blinkSingle(100, WIFILED);
 
         WiFi.disconnect();
         WiFi.reconnect();
-        previusMillisWIFI = currentMillis;
+        previousMillisWIFI = currentMillis;
     }else{
-    blinkSingleAsy(10,,500,WIFILED);
+        // parpadeo del led Tiempo On y Tiempo Off
+        blinkSingleAsy(10,500,WIFILED);
     }
 }
 //--------------------------------------------------------------
 // Loop Mode AP
 //--------------------------------------------------------------void wifiAPLoop(){
+void wifiAPLoop(){
     //parpadeo variable en con transferencia de Datos
     blinkRandomSingle(50, 100, WIFILED);
     dnsServer.processNextRequest(); //Captive portal DNS re-direct
